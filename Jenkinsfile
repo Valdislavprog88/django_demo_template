@@ -20,6 +20,7 @@ pipeline {
             agent any
             steps {
                 sh 'docker build -t evmexaprog88/django_jenkins:${GIT_COMMIT}'
+
             }
         }
     }
