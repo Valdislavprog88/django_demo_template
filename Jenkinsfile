@@ -20,9 +20,17 @@ pipeline {
         stage("build") {
             agent any
             steps {
-                sh 'docker build -t evmexaprog88/django_jenkins:${GIT_COMMIT} .'
-
+                sh 'docker build . -t evmexaprog88/django_jenkins:${GIT_COMMIT} -t evmexaprog88/django_jenkins:latest'
             }
         }
+        stage("push") {
+            withCredentials([usernamePassword(credentialsId: 'evmexaDockerCred',
+            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                sh 'docker login -u ${USERNAME} -p ${PASSWORD}'
+                sh 'docker push evmexaprog88/django_jenkins:${GIT_COMMIT}'
+                sh 'docker push evmexaprog88/django_jenkins:latest'
+            }
+        }
+
     }
 }
