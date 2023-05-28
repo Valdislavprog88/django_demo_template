@@ -43,6 +43,7 @@ pipeline {
                     sh 'ssh -o StrictHostKeyChecking=no -i ${KEY_FILE} ${USERNAME}@evmeshkin.devops.io12.me docker-compose -f ~${WORKSPACE}/docker-compose.yaml up -d'
                     sh 'scp -o StrictHostKeyChecking=no -i ${KEY_FILE} evmeshkin.devops.io12.me.conf ${USERNAME}@devops.io12.me:~/nginx/'
                     sh 'ssh -o StrictHostKeyChecking=no -i ${KEY_FILE} ${USERNAME}@devops.io12.me sudo systemctl reload nginx'
+                    sh 'ssh -o StrictHostKeyChecking=no -i ${KEY_FILE} ${USERNAME}@devops.io12.me sudo certbot --nginx --non-interactive --agree-tos -m paramonov@informatics.ru -d evmeshkin.devops.io12.me'
                 }
             }
         }
