@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  backend:
+    image: evmexaprog88/django_jenkins:latest
+    ports:
+      - "8087:80"
